@@ -3,8 +3,8 @@ import * as postRepo from "../data/posts.js";
 export async function getPosts(req, res) {
   const { username } = req.query;
   const posts = await (username
-    ? await postRepo.getAllByUsername(username)
-    : await postRepo.getAll());
+    ? postRepo.getAllByUsername(username)
+    : postRepo.getAll());
   res.status(200).json(posts);
 }
 
