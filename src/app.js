@@ -3,6 +3,7 @@ import "express-async-errors";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
+import postsRouter from "./router/postsRouter.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -12,6 +13,9 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
+
+// 라우터 세팅
+app.use("/posts", postsRouter);
 
 // 지원하지 않는 API로 접속할 경우 (Not found)
 app.use((req, res, next) => {
