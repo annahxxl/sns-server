@@ -1,0 +1,32 @@
+{
+  "name": "sns-server",
+  "version": "1.0.0",
+  "description": "Node.js를 이용한 REST서버 만들기",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annahxxl/sns-server.git"
+  },
+  "author": "Hanna Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annahxxl/sns-server/issues"
+  },
+  "homepage": "https://github.com/annahxxl/sns-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
