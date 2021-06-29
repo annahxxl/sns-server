@@ -8,7 +8,7 @@ router.route("/").get(postCtrl.getPosts).post(postCtrl.createPost);
 router
   .route("/:id")
   .get(postCtrl.getPost)
-  .put(postCtrl.updatePost)
+  .patch(postCtrl.updatePost)
   .delete(postCtrl.deletePost);
 
 export default router;
