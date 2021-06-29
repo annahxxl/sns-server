@@ -38,7 +38,7 @@ export async function create(content, username, name) {
     name,
   };
   posts.unshift(newPost);
-  return post;
+  return newPost;
 }
 
 export async function update(id, content) {
