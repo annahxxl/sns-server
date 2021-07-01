@@ -3,6 +3,7 @@ import "express-async-errors";
 import { body } from "express-validator";
 import { validate } from "../middleware/validator.js";
 import * as postCtrl from "../controller/postController.js";
+import { isAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -16,13 +17,13 @@ const validatePost = [
 
 router
   .route("/")
-  .get(postCtrl.getPosts)
-  .post(validatePost, postCtrl.createPost);
+  .get(isAuth, postCtrl.getPosts)
+  .post(isAuth, validatePost, postCtrl.createPost);
 
 router
   .route("/:id") // To-do : 정규표현식 추가하기
-  .get(postCtrl.getPost)
-  .patch(validatePost, postCtrl.updatePost)
-  .delete(postCtrl.deletePost);
+  .get(isAuth, postCtrl.getPost)
+  .patch(isAuth, validatePost, postCtrl.updatePost)
+  .delete(isAuth, postCtrl.deletePost);
 
 export default router;
