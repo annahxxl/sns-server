@@ -18,6 +18,7 @@ router
   .route("/")
   .get(postCtrl.getPosts)
   .post(validatePost, postCtrl.createPost);
+
 router
   .route("/:id") // To-do : 정규표현식 추가하기
   .get(postCtrl.getPost)

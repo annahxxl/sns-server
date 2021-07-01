@@ -4,6 +4,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import postRouter from "./router/postRouter.js";
+import userRouter from "./router/userRouter.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,8 +17,9 @@ app.use(cors());
 
 // 라우터 세팅
 app.use("/posts", postRouter);
+app.use("/users", userRouter);
 
-// 지원하지 않는 API로 접속할 경우 (Not found)
+// 지원하지 않는 API로 접속할 경우 (Not Found)
 app.use((req, res, next) => {
   res.sendStatus(404);
 });
