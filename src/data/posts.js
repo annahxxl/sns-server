@@ -44,7 +44,7 @@ export async function create(content, userId) {
     id: Date.now().toString(),
     content,
     createdAt: new Date().toString(),
-    userId: "1",
+    userId,
   };
   posts.unshift(newPost);
   return getById(newPost.id);
