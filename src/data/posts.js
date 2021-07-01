@@ -26,7 +26,7 @@ export async function getAll() {
 
 export async function getAllByUsername(username) {
   return getAll().then((posts) => {
-    posts.filter((post) => post.username === username);
+    return posts.filter((post) => post.username === username);
   });
 }
 
