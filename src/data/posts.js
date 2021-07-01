@@ -1,44 +1,53 @@
+import * as userRepo from "./users.js";
+
 let posts = [
   {
     id: "2",
-    content: "지현이의 게시글",
-    createdAt: Date().toString(),
-    username: "aji",
-    name: "Jihyeon",
-    url: "",
+    content: "두번째 게시글",
+    createdAt: new Date().toString(),
+    userId: "1",
   },
   {
     id: "1",
-    content: "한나의 게시글",
-    createdAt: Date().toString(),
-    username: "annahxxl",
-    name: "Hanna",
-    url: "",
+    content: "한나의 첫번째 게시글",
+    createdAt: new Date().toString(),
+    userId: "1",
   },
 ];
 
 export async function getAll() {
-  return posts;
+  return Promise.all(
+    posts.map(async (post) => {
+      const { username, name, url } = await userRepo.findById(post.userId);
+      return { ...post, username, name, url };
+    })
+  );
 }
 
 export async function getAllByUsername(username) {
-  return posts.filter((post) => post.username === username);
+  return getAll().then((posts) => {
+    posts.filter((post) => post.username === username);
+  });
 }
 
 export async function getById(id) {
-  return posts.find((post) => post.id === id);
+  const post = posts.find((post) => post.id === id);
+  if (!post) {
+    return null;
+  }
+  const { username, name, url } = await userRepo.findById(post.userId);
+  return { ...post, username, name, url };
 }
 
-export async function create(content, username, name) {
+export async function create(content, userId) {
   const newPost = {
     id: Date.now().toString(),
     content,
-    createdAt: Date().toString(),
-    username,
-    name,
+    createdAt: new Date().toString(),
+    userId: "1",
   };
   posts.unshift(newPost);
-  return newPost;
+  return getById(newPost.id);
 }
 
 export async function update(id, content) {
@@ -46,7 +55,7 @@ export async function update(id, content) {
   if (post) {
     post.content = content;
   }
-  return post;
+  return getById(post.id);
 }
 
 export async function remove(id) {
