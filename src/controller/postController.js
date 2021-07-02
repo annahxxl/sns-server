@@ -1,5 +1,7 @@
 import * as postRepo from "../data/posts.js";
 
+// To-do : GET요청 댓글 같이 불러오도록 수정하기
+
 export async function getPosts(req, res) {
   const { username } = req.query;
   const posts = await (username

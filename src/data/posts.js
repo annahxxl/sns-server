@@ -1,5 +1,7 @@
 import * as userRepo from "./users.js";
 
+// To-do : 댓글 데이터와 연결하기
+
 let posts = [
   {
     id: "2",
