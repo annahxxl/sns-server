@@ -1,5 +1,4 @@
 import express from "express";
-import "express-async-errors";
 import { body } from "express-validator";
 import { validate } from "../middleware/validator.js";
 import * as userCtrl from "../controller/userController.js";

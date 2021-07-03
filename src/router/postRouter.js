@@ -1,5 +1,4 @@
 import express from "express";
-import "express-async-errors";
 import { body } from "express-validator";
 import { validate } from "../middleware/validator.js";
 import * as postCtrl from "../controller/postController.js";
@@ -16,6 +15,11 @@ const validatePost = [
   validate,
 ];
 
+const validateComment = [
+  body("content").trim().notEmpty().withMessage("내용을 입력해 주세요."),
+  validate,
+];
+
 router
   .route("/")
   .get(isAuth, postCtrl.getPosts)
@@ -28,10 +32,15 @@ router
   .delete(isAuth, postCtrl.deletePost);
 
 // 댓글
-router.post("/:id/comments", isAuth, commentCtrl.createComment);
+router.post(
+  "/:id/comments",
+  isAuth,
+  validateComment,
+  commentCtrl.createComment
+);
 router
   .route("/:id/comments/:commentId")
-  .patch(isAuth, commentCtrl.updateComment)
+  .patch(isAuth, validateComment, commentCtrl.updateComment)
   .delete(isAuth, commentCtrl.deleteComment);
 
 export default router;
