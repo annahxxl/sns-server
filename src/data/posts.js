@@ -1,6 +1,5 @@
 import * as userRepo from "./users.js";
-
-// To-do : 댓글 데이터와 연결하기
+import * as commentRepo from "./comments.js";
 
 let posts = [
   {
@@ -21,7 +20,8 @@ export async function getAll() {
   return Promise.all(
     posts.map(async (post) => {
       const { username, name, url } = await userRepo.findById(post.userId);
-      return { ...post, username, name, url };
+      const comments = await commentRepo.getAllByPostId(post.id);
+      return { ...post, username, name, url, comments };
     })
   );
 }
@@ -37,8 +37,9 @@ export async function getById(id) {
   if (!post) {
     return null;
   }
+  const comments = await commentRepo.getAllByPostId(post.id);
   const { username, name, url } = await userRepo.findById(post.userId);
-  return { ...post, username, name, url };
+  return { ...post, username, name, url, comments };
 }
 
 export async function create(content, userId) {

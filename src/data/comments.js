@@ -1,28 +1,46 @@
-// To-do : 회원 데이터와 연결하기
+import * as userRepo from "./users.js";
 
 let comments = [
+  {
+    id: "3",
+    content: "첫번째 게시글의 댓글22222",
+    createdAt: new Date().toString(),
+    postId: "1",
+    userId: "1",
+  },
   {
     id: "2",
     content: "댓글22222",
     createdAt: new Date().toString(),
+    postId: "2",
     userId: "1",
-    postId: "1",
   },
   {
     id: "1",
     content: "댓글11111",
     createdAt: new Date().toString(),
-    userId: "1",
     postId: "1",
+    userId: "1",
   },
 ];
 
 export async function getById(commentId) {
   const comment = comments.find((comment) => comment.id === commentId);
-  if (!comment) {
-    return null;
-  }
-  return comment;
+  const { username, name, url } = await userRepo.findById(comment.userId);
+  return {
+    ...comment,
+    username,
+    name,
+    url,
+  };
+}
+
+// 해당 게시글의 모든 댓글 가져오기
+export async function getAllByPostId(postId) {
+  let foundComments = comments.filter((comment) => comment.postId === postId);
+  return Promise.all(
+    foundComments.map(async (comment) => await getById(comment.id))
+  );
 }
 
 export async function create(content, userId, postId) {
@@ -30,8 +48,8 @@ export async function create(content, userId, postId) {
     id: Date.now().toString(),
     content,
     createdAt: new Date().toString(),
-    userId: "1",
     postId,
+    userId,
   };
   comments.unshift(newComment);
   return getById(newComment.id);
