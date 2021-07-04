@@ -6,16 +6,15 @@ const SELECT_JOIN =
 // 해당 게시글의 모든 댓글 가져오기
 export async function getAllByPostId(postId) {
   return db
-    .execute(`${SELECT_JOIN} WHERE postId=? ${ORDER_DESC}`, [postId]) //
+    .execute(`${SELECT_JOIN} WHERE postId=? ORDER BY comments.createdAt DESC`, [
+      postId,
+    ]) //
     .then((result) => result[0]);
 }
 
 export async function getById(commentId) {
   return db
-    .execute(
-      `${SELECT_JOIN} WHERE comments.id=? ORDER BY comments.createdAt DESC`,
-      [commentId]
-    ) //
+    .execute(`${SELECT_JOIN} WHERE comments.id=?`, [commentId]) //
     .then((result) => result[0][0]);
 }
 
