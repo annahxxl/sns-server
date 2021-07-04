@@ -1,21 +1,4 @@
-import * as userRepo from "./users.js";
-import * as commentRepo from "./comments.js";
 import { db } from "../db.js";
-
-// let posts = [
-//   {
-//     id: "2",
-//     content: "두번째 게시글",
-//     createdAt: new Date().toString(),
-//     userId: "1",
-//   },
-//   {
-//     id: "1",
-//     content: "한나의 첫번째 게시글",
-//     createdAt: new Date().toString(),
-//     userId: "1",
-//   },
-// ];
 
 const SELECT_JOIN =
   "SELECT posts.id, posts.content, posts.createdAt, posts.userId, users.username, users.name, users.url FROM posts JOIN users ON posts.userId=users.id";

@@ -1,14 +1,3 @@
-// let users = [
-//   {
-//     id: "1",
-//     username: "annahxxl",
-//     password: "$2b$10$oeh4ZSJJkHJDXp56zlLHKOL/yVYilPBc2.zUcT5b5/2g.Ox5hqDem",
-//     name: "Hanna",
-//     email: "8annahxxl@gmail.com",
-//     url: "",
-//   },
-// ];
-
 import { db } from "../db.js";
 
 export async function findByUsername(username) {
