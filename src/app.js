@@ -5,8 +5,8 @@ import helmet from "helmet";
 import cors from "cors";
 import userRouter from "./router/userRouter.js";
 import postRouter from "./router/postRouter.js";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config.js";
+import { db } from "./db.js";
 
 // 앱 세팅
 const app = express();
@@ -29,6 +29,9 @@ app.use((error, req, res, next) => {
   console.error(error);
   res.sendStatus(500);
 });
+
+// DB 연결
+db.getConnection().then(() => console.log("✅ DB 연결 성공!"));
 
 // 서버 연결
 const PORT = process.env.PORT || 3000;
