@@ -31,12 +31,11 @@ app.use((error, req, res, next) => {
 });
 
 // DB 연결
-db.getConnection().then((conn) => {
+db.sync().then((client) => {
   console.log("✅ DB 연결 성공!");
-});
-
-// 서버 연결
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ ${PORT}포트에서 서버 가동 중!`);
+  // 서버 연결
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`✅ ${PORT}포트에서 서버 가동 중!`);
+  });
 });

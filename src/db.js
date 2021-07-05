@@ -1,11 +1,9 @@
-import mysql from "mysql2";
 import "dotenv/config.js";
+import sequelize from "sequelize";
 
-const connection = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
+const { DB_DATABASE, DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+
+export const db = new sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: "mysql",
 });
-
-export const db = connection.promise();
