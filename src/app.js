@@ -31,7 +31,7 @@ app.use((error, req, res, next) => {
 });
 
 // DB 연결
-db.sync().then((client) => {
+db.sync().then(() => {
   console.log("✅ DB 연결 성공!");
   // 서버 연결
   const PORT = process.env.PORT || 3000;
