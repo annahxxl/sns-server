@@ -1,4 +1,4 @@
-import * as postRepo from "../data/posts.js";
+import * as postRepo from "../model/posts.js";
 
 // To-do : GET요청 댓글 같이 불러오도록 수정하기
 

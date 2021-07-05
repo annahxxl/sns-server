@@ -1,4 +1,4 @@
-import * as commentRepo from "../data/comments.js";
+import * as commentRepo from "../model/comments.js";
 
 export async function createComment(req, res) {
   const { id } = req.params;

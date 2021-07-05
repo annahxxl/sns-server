@@ -1,4 +1,4 @@
-import * as userRepo from "../data/users.js";
+import * as userRepo from "../model/users.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
